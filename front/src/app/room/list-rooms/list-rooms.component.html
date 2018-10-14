@@ -1,0 +1,42 @@
+  <!-- LIST OF ROOMS -->
+  <div class="container pt-3">
+    <div id="colorlib-rooms" class="colorlib-light-grey">
+
+      <div class="row">
+          <div class="col-md-12 text-center colorlib-heading">
+            <span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span>
+            <h2>Chambres &amp; Suites</h2>
+            <p>Veuillez selectionner un type de chambre parmis la liste ci-dessous afin de profiter pleinement de votre sejour.</p>
+          </div>
+      </div>
+
+      <div class="container" *ngIf="getRooms()?.length > 0">
+          <div class="row" *ngIf="getRooms().length">
+                <div class="item col-md-4" *ngFor="let room of getRooms(); let i = index">
+                  <div class="room image-popup-link room{{room.roomType.id}}"></div>
+                  <div class="desc text-center border-1-grey">
+                    <span class="rate-star"><i class="icon-star-full full"></i><i class="icon-star-full full"></i><i class="icon-star-full full"></i><i class="icon-star-full full"></i><i class="icon-star-full full"></i></span>
+                    <h3><a href="rooms-suites.html">{{room.roomType.type}}</a></h3>
+                    <p class="price">
+                      <span class="currency">&euro;</span>
+                      <span class="price-room">{{room.roomType.ppn}}</span>
+                      <span class="per">/ nuit</span>
+                    </p>
+                    <ul>
+                      <li><i class="icon-check"></i> Surface : {{room.roomType.surface}} m2</li>
+                      <li><i class="icon-check"></i> Petit dejeuner inclus</li>
+                      <li><i class="icon-check"></i> Nombre de Personnes : {{room.roomType.nbradults + room.roomType.nbrchildrens}}</li>
+                    </ul>
+                    <p><button (click)="validateRoom(room)" class="btn btn-primary btn-book">Choisir cette chambre</button></p>
+                  </div>
+                </div>
+          </div>
+      </div>
+    </div>
+
+    <div *ngIf="!getRooms()?.length">
+        <p>Aucune chambre disponible</p>
+    </div>
+</div>
+
+

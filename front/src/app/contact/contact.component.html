@@ -1,0 +1,119 @@
+<div class="container p-5">
+  <h1 class="pb-4 text-center">Formulaire de contact</h1>
+  <div *ngIf="!getSendMail()" class="row colorlib-light-grey p-3">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="row contact-info-wrap">
+        <div class="col-md-4">
+          <p><span><i class="icon-location-2"></i></span> 55 rue de Vincennes<br />98713 Papeete - Tahiti<br />Polynésie française</p>
+        </div>
+        <div class="col-md-4">
+          <p><span><i class="icon-phone2"></i></span> <a href="tel://68901002003">(689) 01 002 003 </a></p>
+        </div>
+        <div class="col-md-4">
+          <p><span><i class="icon-envelope"></i></span> <a href="mailto:bookinghotelproject@gmail.com">bookinghotelproject@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <h3>Vos informations :</h3>
+
+      
+      <form class="needs-validation" novalidate  (ngSubmit)="onSubmitForm()" [formGroup]="datasForm">
+       
+        <div class="row form-group">          
+          <div class="col-md-6">
+            <label for="fname">Nom</label>
+            <input type="text" id="name" class="form-control" placeholder="Votre Nom" formControlName="name" required
+            [ngClass]="{'is-invalid': f.name.errors && f.name.touched,
+                        'is-valid': !f.name.errors && f.name.touched}">
+            <div class="invalid-feedback">
+              Ce champs est obligatoire (2 caractères min).
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="lname">Prénom</label>
+            <input type="text" id="firstName" class="form-control" placeholder="Votre prénom" formControlName="firstName" required
+            [ngClass]="{'is-invalid': f.firstName.errors && f.firstName.touched,
+                        'is-valid': !f.firstName.errors && f.firstName.touched}">
+            <div class="invalid-feedback"> 
+                Ce champs est obligatoire (2 caractères min).
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col-md-12">
+            <label for="email">Email</label>
+            <input type="text" id="email" class="form-control" placeholder="Votre Email" formControlName="email"
+            [ngClass]="{'is-invalid': f.email.errors && f.email.touched,
+                        'is-valid': !f.email.errors && f.email.touched}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+            <div class="invalid-feedback">
+              Merci de saisir un Email valide.
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col-md-12">
+            <label for="subject">Sujet</label>
+            <input type="text" id="subject" class="form-control" placeholder="Sujet de votre message" formControlName="subject"
+            [ngClass]="{'is-invalid': f.subject.errors && f.subject.touched,
+                        'is-valid': !f.subject.errors && f.subject.touched}">
+            <div class="invalid-feedback">
+              Merci de saisir un sujet.
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col-md-12">
+            <label for="message">Message</label>
+            <textarea  name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Saisir votre message" formControlName="message"            
+                      [ngClass]="{'is-invalid': f.message.errors && f.message.touched,
+                                  'is-valid': !f.message.errors && f.message.touched}">            
+            </textarea>
+            <div class="invalid-feedback">
+                Merci de saisir un message (10 caractères min.)
+            </div>
+          </div>
+        </div>
+        <div class="form-group text-center">
+          <button id="singlebutton" name="sendMsg" [disabled]="datasForm.invalid || getSubmitted()" class="btn btn-primary" 
+                  type="submit">Envoyer le message</button>
+        </div>
+
+      </form>		
+    </div>
+  </div>
+
+  <div *ngIf="getWaiting()">
+    <div class="opacity"></div>
+    <div class="blocMsg">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-body text-center">
+                  <img src="./assets/images/loader.gif" /><br/>Message en cours d'envoi.
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>
+
+  <div *ngIf="getSendMail()" class="alert alert-success  alert-dismissible fade show" role="alert">
+      <h4 class="alert-heading">Message envoyé</h4>
+      <p>Votre message a bien été envoyé. Nous reviendrons vers vous dans les meilleurs delais.</p>
+      <hr>
+      <p class="mb-0">Cordialement,<br/>HOTEL FICTIF</p>
+      <hr>
+      <p class="mb-0"><a routerLink="/">Retour à la page d'accueil</a></p>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="redirectHome()">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+
+</div> <!-- /CONTAINER -->
+
+
+
+

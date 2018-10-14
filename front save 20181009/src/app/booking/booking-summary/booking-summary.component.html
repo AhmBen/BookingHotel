@@ -1,0 +1,64 @@
+<div *ngIf="isMyBooking()">
+
+  <p class="lead text-success font-weight-bold">
+    Merci pour votre réservation
+  </p>
+
+  <p class="lead text-primary font-weight-bold">
+    {{getCivility() == 1 ? 'Monsieur' : 'Madame'}} {{getName()}}
+  </p>
+
+  <p>
+    Vous trouverez ci-dessous le récapitulatif de votre réservation.
+  </p>
+
+  <div class="row">
+    <div class="col-lg-6 col-md-12">
+      <div class="card border border-primary">
+        <div class="card-header card-header-text card-header-warning">
+          <div class="card-text">
+            <h4 class="card-title">Détails de la réservation : {{getNumBooking()}}</h4>
+            <p class="card-category">Hotel fictif de mon projet</p>
+          </div>
+        </div>
+        <div class="card-body table-responsive">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>Date d'arrivée :</td>
+                <td>{{getDateIn() | date:'dd MMMM yyyy':'localeFr'}}</td>
+              </tr>
+              <tr>
+                <td>Date de départ :</td>
+                <td>{{getDateOut() | date:'dd MMMM yyyy':'localeFr'}}</td>
+              </tr>
+              <tr>
+                <td>Nombre d'adultes :</td>
+                <td>{{getNbrAdults()}}</td>
+              </tr>
+              <tr>
+                <td>Nombre d'enfants :</td>
+                <td>{{getNbrChildren()}}</td>
+              </tr>
+              <tr>
+                <td>Type de chambre :</td>
+                <td>{{getTypeOfRoom()}}</td>
+              </tr>
+              <!--
+              <tr>
+                <td>Prix par nuit</td>
+                <td>{{getRoomPpn()}} Euros</td>
+              </tr>
+              -->
+              <tr class="bg-light">
+                <td>Prix Total pour {{getNbrOfNights()}} nuit{{getNbrOfNights() > 1 ? 's' : ''}}</td>
+                <td><strong>{{getTotalPrice()}} Euros</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div> <!-- /ngIf-->

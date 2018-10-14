@@ -1,0 +1,212 @@
+<main role="main">
+  <!-- CAROUSEL -->
+  <div id="carouselExampleIndicators" class="carousel slide container pb-5 pt-3" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="./assets/images/slide-285-9.jpg" alt="First slide">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Image 1</h5>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eleifend.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="./assets/images/slide-285-8.jpg" alt="Second slide">
+          <div class="carousel-caption d-none d-md-block">
+              <h5>Image 2</h5>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eleifend.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="./assets/images/slide-285-4.jpg" alt="Third slide">
+          <div class="carousel-caption d-none d-md-block">
+              <h5>Image 3</h5>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eleifend.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="./assets/images/slide-285-5.jpg" alt="Third slide">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Image 4</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eleifend.</p>
+              </div>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="./assets/images/slide-285-7.jpg" alt="Third slide">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Image 5</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eleifend.</p>
+              </div>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="./assets/images/slide-285-11.jpg" alt="Third slide">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Image 6</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eleifend.</p>
+              </div>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="./assets/images/slide-285-12.jpg" alt="Third slide">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Image 7</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eleifend.</p>
+              </div>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="./assets/images/slide-285-10.jpg" alt="Third slide">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Image 8</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eleifend.</p>
+              </div>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Précedent</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Suivant</span>
+      </a>
+  </div>
+
+  <!-- BOOKING-->
+  <div class="container">
+    <div class="colorlib-light-grey p-3 border-1-blue">
+      <form class="form-horizontal" novalidate (ngSubmit)="onSubmitForm()" [formGroup]="datasForm">
+        <fieldset>
+        
+        <div class="form-group col-md-12 row">
+            <div class="col-md-3">
+              <label class="control-label" for="datein" >Date Arrivée</label>   
+              <input id="datein" name="datein" type="date" class="form-control input-md"  required  
+                      formControlName="datein" min="{{getToday()}}" max="{{getTodayPlusOneYear()}}"
+                      [ngClass]="{'is-invalid': f.datein.errors || datasForm.errors?.datesMsg,
+                                  'is-valid': !f.datein.errors && !datasForm.errors?.datesMsg && f.datein.touched}" >
+              <div *ngIf="f.datein.errors?.required" class="invalid-feedback">Saisir une date d'arrivée valide</div>
+              <div *ngIf="datasForm.errors?.datesMsg && !f.datein.errors?.required" class="invalid-feedback">{{datasForm.errors?.datesMsg}}</div>
+            </div>
+
+            <div class="col-md-3">
+              <label class="control-label" for="dateout" >Date de départ</label>  
+              <input id="dateout" name="dateout" type="date" class="form-control input-md"  required  
+                      formControlName="dateout" min="{{getTomorrow()}}" max={{getTomorrowPlusOneYear()}}
+                      [ngClass]="{'is-invalid': f.dateout.errors  || datasForm.errors?.datesMsg ,
+                                  'is-valid': !f.dateout.errors && !datasForm.errors?.datesMsg && f.dateout.touched}" >
+              <div *ngIf="f.dateout.errors?.required" class="invalid-feedback">Saisir une date de départ valide</div>
+            </div>
+
+            <div class="col-md-3">
+              <label class="control-label" for="nbradults" >Nombre Adulte(s)</label>        
+              <input id="nbradults" name="nbradults" type="number" class="form-control input-md" min="1" required  
+                      formControlName="nbradults" 
+                      [ngClass]="{'is-invalid': f.nbradults.errors || f.nbradults.errors?.min,
+                                  'is-valid': !f.nbradults.errors && !f.nbradults.errors?.min && f.nbradults.touched}" >
+              <div *ngIf="f.nbradults.errors?.required" class="invalid-feedback">Saisir un nombre de personnes</div>
+              <div *ngIf="f.nbradults.errors?.min" class="invalid-feedback">Il faut au moins un adulte pour réserver</div>
+            </div>
+
+            <div class="col-md-3">
+              <label class="control-label" for="nbrchildrens">Nombre Enfant(s)</label>  
+              <input id="nbrchildrens" name="nbrchildrens" type="number" class="form-control input-md" min="0" required 
+                    formControlName="nbrchildrens"
+                    [ngClass]="{ 'is-invalid': f.nbrchildrens.errors || f.nbrchildrens.errors?.min,
+                                'is-valid': !f.nbrchildrens.errors && !f.nbrchildrens.errors?.min && f.nbrchildrens.touched}" >
+              <div *ngIf="f.nbrchildrens.errors?.required" class="invalid-feedback">Saisir un nombre d'enfant(s)</div>
+              <div *ngIf="f.nbrchildrens.errors?.min" class="invalid-feedback">La valeur ne peut être inferieure à zéro</div>
+            </div>
+
+          </div> 
+        
+          <div class="form-group col-md-12 row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+              <button [disabled]="datasForm.invalid" name="book" class="btn btn-primary btn-block" type="submit">Vérifier les disponibilités</button>
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="container">
+      <div  id="colorlib-services" >
+        <div class="row">
+          <div class="col-md-3 text-center">
+            <div class="services">
+              <span class="icon">
+                <i class="flaticon-reception"></i>
+              </span>
+              <h3>Réception 24/7</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vestibulum semper metus eget commodo. Pellentesque luctus diam vitae turpis vehicula condimentum.</p>
+            </div>
+          </div>
+          <div class="col-md-3 text-center">
+            <div class="services">
+              <span class="icon">
+                <i class="flaticon-herbs"></i>
+              </span>
+              <h3>Spa Suites</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vestibulum semper metus eget commodo. Pellentesque luctus diam vitae turpis vehicula condimentum.</p>
+            </div>
+          </div>
+          <div class="col-md-3 text-center">
+            <div class="services">
+              <span class="icon">
+                <i class="flaticon-car"></i>
+              </span>
+              <h3>Transfert</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vestibulum semper metus eget commodo. Pellentesque luctus diam vitae turpis vehicula condimentum.</p>
+            </div>
+          </div>
+          <div class="col-md-3 text-center">
+            <div class="services">
+              <span class="icon">
+                <i class="flaticon-cheers"></i>
+              </span>
+              <h3>Bar &amp; Restaurant</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vestibulum semper metus eget commodo. Pellentesque luctus diam vitae turpis vehicula condimentum.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <!-- LIST OF ROOMS -->
+  <div class="container">
+    <div id="colorlib-rooms" class="colorlib-light-grey">
+          
+        <div class="row">
+          <div class="col-md-12 col-md-offset-3 text-center colorlib-heading">
+            <span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span>
+            <h2>Chambres &amp; Suites</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vestibulum semper metus eget commodo. Pellentesque luctus diam vitae turpis vehicula.</p>
+          </div>
+        </div>
+
+        <div class="row">
+              <div class="item col-md-4" *ngFor="let room of getRooms();">
+                <a href="./assets/images/room-1.jpg" class="room image-popup-link room{{room.roomType.id}}"></a>
+                <div class="desc text-center border-1-grey">
+                  <span class="rate-star"><i class="icon-star-full full"></i><i class="icon-star-full full"></i><i class="icon-star-full full"></i><i class="icon-star-full full"></i><i class="icon-star-full full"></i></span>
+                  <h3><a href="rooms-suites.html">{{room.roomType.type}}</a></h3>
+                  <p class="price">
+                    <span class="currency">€</span>
+                    <span class="price-room">{{room.roomType.ppn}}</span>
+                    <span class="per">/ nuit</span>
+                  </p>
+                  <ul>
+                      <li><i class="icon-check"></i> Surface : {{room.roomType.surface}} m2</li>
+                      <li><i class="icon-check"></i> Petit dejeuner inclus</li>
+                      <li><i class="icon-check"></i> Nombre de Personnes : {{room.roomType.nbradults + room.roomType.nbrchildrens}}</li>
+                  </ul>
+                </div>
+              </div>
+        </div>
+    </div>
+  </div>
+    
+</main>
+

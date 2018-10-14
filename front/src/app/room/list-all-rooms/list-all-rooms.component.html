@@ -1,0 +1,37 @@
+  <!-- LIST OF ROOMS -->
+  <div class="container pt-3">
+      <div id="colorlib-rooms" class="colorlib-light-grey">
+  
+        <div class="row">
+            <div class="col-md-12 text-center colorlib-heading">
+              <span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span>
+              <h2>Chambres &amp; Suites</h2>
+            </div>
+        </div>
+  
+        <div class="container">
+            <div class="row">
+                  <div class="item col-md-4" *ngFor="let room of getRooms(); let i = index">
+                    <div class="room room{{room.roomType.id}}"></div>
+                    <div class="desc text-center border-1-grey">
+                      <span class="rate-star"><i class="icon-star-full full"></i><i class="icon-star-full full"></i><i class="icon-star-full full"></i><i class="icon-star-full full"></i><i class="icon-star-full full"></i></span>
+                      <h3>{{room.roomType.type}}</h3>
+                      <p class="price">
+                        <span class="currency">&euro;</span>
+                        <span class="price-room">{{room.roomType.ppn}}</span>
+                        <span class="per">/ nuit</span>
+                      </p>
+                      <ul>
+                        <li><i class="icon-check"></i> Surface : {{room.roomType.surface}} m2</li>
+                        <li><i class="icon-check"></i> Petit dejeuner inclus</li>
+                        <li><i class="icon-check"></i> Nombre de Personnes : {{room.roomType.nbradults + room.roomType.nbrchildrens}}</li>
+                      </ul>
+                    </div>
+                  </div>
+            </div>
+        </div>
+      </div>
+  </div>
+  
+  
+  
