@@ -21,7 +21,7 @@ export class AddCustomerComponent implements OnInit {
   datasForm: FormGroup;
   private myBooking: Booking;
   private myCustomer: Customer;
-  private submitted: Boolean = false;  
+  private submitted: Boolean = false;
   private waiting: Boolean = false;
 
   constructor(private roomService: RoomService,
@@ -52,8 +52,7 @@ export class AddCustomerComponent implements OnInit {
       zipCode   : ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
       city      : ['', [Validators.required, Validators.minLength(2)]],
       country   : ['', [Validators.required, Validators.minLength(2)]],
-      phone     : ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
-      newsletter: ['']
+      phone     : ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]]
      }
     );
   }
@@ -64,10 +63,7 @@ export class AddCustomerComponent implements OnInit {
 
     const formValue = this.datasForm.value;
 
-    // console.log(this.datasForm);
-
     if ( !this.datasForm.invalid) {
-      //console.log('Formulaire Valide');
 
       this.waiting = true;
 
@@ -84,13 +80,12 @@ export class AddCustomerComponent implements OnInit {
     }
 }
 
-public get f() {console.log(this.datasForm.controls); return this.datasForm.controls; }
+  public get f() {/*console.log(this.datasForm.controls);*/ return this.datasForm.controls; }
 
-private submitNewBooking(myBooking: Booking) {
+  private submitNewBooking(myBooking: Booking) {
     this.bookingService.submitNewBooking(myBooking)
                        .subscribe(
                                     (valideBooking: Booking) => {
-                                          // console.log('Resa OK');
                                           this.datas.valideBooking = valideBooking;
                                           this.waiting = false;
                                           this.router.navigateByUrl('/booking/summary');
@@ -102,11 +97,10 @@ private submitNewBooking(myBooking: Booking) {
     return this.submitted;
   }
 
-  public isBookingParam(){
+  public isBookingParam() {
     // If not dateIn value , we don't display the form
-    // return this.datas.bookingParam.dateIn ? true : false;
-
     // true, true, only for test
+
     return this.datas.bookingParam.dateIn ? true : false;
   }
 
@@ -143,11 +137,11 @@ private submitNewBooking(myBooking: Booking) {
     const dateIn: Date = new Date(this.getDateIn());
     const dateOut: Date = new Date(this.getDateOut());
     */
-    const oneDay = 1000*60*60*24;
+    const oneDay = 1000 * 60 * 60 * 24;
 
     return Math.abs( (new Date(this.getDateOut()).getTime() - new Date(this.getDateIn()).getTime()) / oneDay );
   }
-  
+
   public getWaiting() {
     return this.waiting;
   }

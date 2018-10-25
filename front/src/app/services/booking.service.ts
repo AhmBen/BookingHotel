@@ -35,7 +35,7 @@ export class BookingService {
 
   public submitCancelBooking(): Observable<Boolean> {
       const myBooking = this.datas.valideBooking;
-      //return this.http.delete<Aliment>(this.restUrl + '/' + id);
+      // return this.http.delete<Aliment>(this.restUrl + '/' + id);
       return this.http.delete<Boolean>(this.restUrl + '/delete/' + myBooking.id + '/' + myBooking.customer.name.toUpperCase());
   }
 

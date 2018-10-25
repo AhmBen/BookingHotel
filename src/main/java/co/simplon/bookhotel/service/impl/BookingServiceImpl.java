@@ -47,14 +47,6 @@ public class BookingServiceImpl implements BookingService {
 	
 	@Override
 	public void sendAttachmentEmail(Booking booking) throws TemplateException, IOException {
-		/*System.out.println("sending mail");
-        SimpleMailMessage msg = new SimpleMailMessage(mailMessage);//using copy constructor
-        msg.setTo(booking.getCustomer().getMail());
-        msg.setSubject("Confirmation de réservation : " + booking.getNumBooking());
-        // msg.setText("<h1>H1 Title</h1><strong>Message3</strong><br />Message4");
-        msg.setText("<h1>H1 Title</h1><strong>Message3</strong><br />Message4");
-        mailSender.send(msg);
-        System.out.println("done");*/
 		
 		Configuration cfg = new Configuration(); 
 		// Where do we load the templates from:
@@ -213,7 +205,7 @@ public class BookingServiceImpl implements BookingService {
 	@Override
 	public String generateBookingNumber() {		
 		int lengthOfBookingNumber = 6;
-		String charset = "123456789ABCDEFGHIJKLMNPQRSTUVWXYZ"; //Without o O and 0
+		String charset = "123456789ABCDEFGHIJKLMNPQRSTUVWXYZ"; //Without O and 0
 		int charsetLength = charset.length();
 
 		String generatedBookingNumber = ""; 

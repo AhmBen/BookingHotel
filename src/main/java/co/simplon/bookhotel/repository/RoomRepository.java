@@ -18,7 +18,7 @@ public interface RoomRepository extends JpaRepository<Room, Long>{
 	 * 
 	 * On recupere la liste de toutes les chambres reservées
 	 * On recupere la liste de toutes les chambres non reservées pour la periode données grace au NOT IN 
-	 * On recupere la liste de toutes les chambres non reservées pour la periode données distinct par type de chambre
+	 * On recupere la liste de toutes les chambres non reservées pour la periode données par type de chambre
 	 *  - Jointure avec sous requete ne fonctionne pas avec jpql, voir l'url en exemple.
 	 * 
 	 * Example : https://stackoverflow.com/questions/51891198/jpa-query-join-a-subquery-with-grouping-condition
@@ -27,10 +27,10 @@ public interface RoomRepository extends JpaRepository<Room, Long>{
 	@Query(value = "SELECT r3 FROM Room r3 WHERE r3.id = " // Get one type of room if many of the same type
 			+ "("
 			// ----- Start Sub Request 2 : Looking for id of all free rooms pay attention number of personnes -----
-			+ "SELECT min(r1.id) as id FROM Room r1 WHERE r1.id NOT IN  "	
+			+ "SELECT min(r1.id) as id FROM Room r1 WHERE r1 NOT IN  "	
 			+ "("
 			// ----- Start Sub Request 1 : Looking for id of all booking rooms -----
-				+ "SELECT distinct(b.room)  FROM Booking b "  //room dans model Room (mappedBy) et non pas fk_idroom de Booking
+				+ "SELECT b.room  FROM Booking b "  //room dans model Room (mappedBy) et non pas fk_idroom de Booking
 				+ "WHERE "
 					+ "("
 						+ " (datein <= :datein AND dateout >= :dateout)"

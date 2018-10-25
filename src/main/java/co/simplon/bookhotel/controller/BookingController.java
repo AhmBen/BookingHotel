@@ -86,27 +86,23 @@ public class BookingController {
 	}
 	
 	/**
-	 * Create a Booking and a Customer
+	 * Create a new Booking and a new Customer
 	 * @return ResponseEntity<Booking>
 	 * @throws IOException 
 	 * @throws TemplateException 
+	 * @RequestBody Booking
 	 */
 	@RequestMapping(value = "/create", method=RequestMethod.POST) 
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public ResponseEntity<Booking> createBookingAndCustomer(@RequestBody Booking booking) throws TemplateException, IOException {
-		
-		// bookingService.checkCreateForm(booking);
-		
-		System.out.println("=== DEBUT ===");	
-		System.out.println(booking);	
-		System.out.println("==== FIN ====");	
 
 		if (!bookingService.checkCreateForm(booking)) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		else {
 		
+			// Generate Booking number
 			booking.setNumBooking(bookingService.generateBookingNumber());
 			
 			// Calcul number of nights
@@ -126,15 +122,12 @@ public class BookingController {
 			// Generate PDF, a voir par la suite
 			// https://www.baeldung.com/java-pdf-creation		
 	
-			if (sendMail) {
-				// TLSEmail.sendMail(booking, mailFrom, mailPassword, mailSmtpHost, mailSmtpPort, mailSmtpAuth, mailSmtpStarttlsEnable);
-				bookingService.sendAttachmentEmail(booking);
-			}
+			// Send a mail to the customer with the booking summary
+			bookingService.sendAttachmentEmail(booking);
 			
 			return new ResponseEntity<>(booking, HttpStatus.ACCEPTED);
 		}
 		
-		// return booking;
 	}		
 	/**
 	 * Find a specific Booking
